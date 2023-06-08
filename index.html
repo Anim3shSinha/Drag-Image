@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggale image</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            width: 90%;
+            justify-content: space-around;
+            justify-items: center;
+            border: 2px solid black;
+            height: 80%;
+            padding: 30px;
+            border-radius: 30px;
+            background-color: cornsilk;
+        }
+        
+        .container .box {
+            background-color: bisque;
+            position: relative;
+            text-align: center;
+            height: 90%;
+            width: 40%;
+            border-radius: 12px;
+            border: 2px solid black;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        
+        .box .image {
+            height: 80%;
+            width: 80%;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            background-image: url("download1.png");
+        }
+        
+        .box:hover {
+            border: 2px dashed #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Drag and Drop image</h1>
+    <section class="container">
+
+        <div class="box">
+            <h3>Section 1</h3>
+            <div class="image" draggable="true">
+
+            </div>
+        </div>
+        <div class="box">
+            <h3>Section 2</h3>
+        </div>
+
+
+    </section>
+
+    <script>
+        const boxes = document.querySelectorAll(".box");
+        const image = document.querySelector(".image");
+
+        boxes.forEach((box) => {
+            box.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                box.classList.add("hovered");
+            });
+
+            box.addEventListener("dragleave", () => {
+                box.classList.remove("hovered");
+            });
+
+            box.addEventListener("drop", () => {
+                box.appendChild(image);
+                box.classList.remove("hovered");
+            });
+        });
+    </script>
+</body>
+
+</html>
